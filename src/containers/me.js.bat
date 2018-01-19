@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
 import styled from "styled-components/native";
-
+import Icon from 'react-native-vector-icons/FontAwesome';
+const ShopIcon = (<Icon name="book" size={18} color="#03C3D6" />)
 const View = styled.View`
 	flex: 1;
     justify-content: center;
@@ -14,18 +14,16 @@ const Text = styled.Text`
     margin: 10px;
 `;
 
-export default class MainScreen extends Component<{}> {
+export default class ShopScreen extends Component<{}> {
   static navigationOptions = ({navigation,screenProps}) => ({
-    tabBarLabel: '推荐'
+    tabBarLabel: '书城',
+    tabBarIcon: ShopIcon
   })
   render() {
     return (
       	<View>
-	        <Text>
-	          hello world !
-	        </Text>
+          <Icon name='opencart' size={88} color='black' />
       	</View>
     );
   }
 }
-

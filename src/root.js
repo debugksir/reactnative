@@ -1,52 +1,26 @@
-
 import React, { Component } from 'react';
-import { TabNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
 import styled, { ThemeProvider }from "styled-components/native";
-
-import MeScreen from './pages/me';
-import MainScreen from './pages/home';
-
-const theme = {
-  main: '#44E2C4'
-}
-
-const darkTheme = {
-  main: '#DEE4AF'
-}
-const Text = styled.Text``;
-
-const TabNav = TabNavigator({
-  Main: { screen: MainScreen },
-  Me: { screen: MeScreen }
-},{
-  tabBarPosition: 'bottom',
-  animationEnabled: true,
-  tabBarOptions: {
-    activeTintColor: '#e91e63',
-    labelStyle: {
-      fontSize: 12,
-      color: '#333333',
-    },
-    style: {
-      backgroundColor: '#EEEEEE',
-    }
-  }
-});
+import StackNav from './routes/routes';
+import theme from './constants/theme';
 
 class Main extends Component {
   render() {
-    const { switchFlag } = this.props;
+    const { switchFlag, fontSize } = this.props;
+    const colorTheme = switchFlag ? theme.dark : theme.light;
+    const fontTheme = theme[fontSize];
+    const Theme = Object.assign({}, colorTheme, fontTheme);
     return(
-      <ThemeProvider theme={switchFlag ? theme : darkTheme}>
-        <TabNav />
+      <ThemeProvider theme={Theme} >
+        <StackNav />
       </ThemeProvider>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-    switchFlag: state.switchFlag
+    switchFlag: state.switchFlag,
+    fontSize: state.fontSize
 })
 const Root = connect(mapStateToProps)(Main);
 export default Root;
