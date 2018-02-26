@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const View = styled.View`
 	flex-direction: row;
 	justify-content: space-between;
+	align-items: center;
 	padding: 0 16px;
 	width: 100%;
 	height: 44;
@@ -15,18 +16,25 @@ const View = styled.View`
 `;
 const Text = styled.Text`
 	font-size: ${props => props.theme.title};
-	line-height: 44;
+	color: ${props => props.theme.normalFont};
+`;
+const IconText = styled.Text`
+	width: 32;
+	height: 32;
+	line-height: 32;
+	text-align: center;
+	font-size: ${props => props.theme.title};
 	color: ${props => props.theme.normalFont};
 `;
 
 export default class Header extends Component {
 	render() {
-		const { navigate } = this.props.navigation;
+		const { nav, dialogFunc } = this.props;
 		return(
 			<View>
-				<Text><Icon name='share-alt' size={16} /></Text>
+				<IconText onPress={dialogFunc}><Icon name='share-alt' size={16} /></IconText>
 				<Text> 我 </Text>
-				<Text onPress={ () => navigate('Setting')}><Icon name='cog' size={16} /></Text>
+				<IconText onPress={ () => nav.navigate('Setting')}><Icon name='cog' size={16} /></IconText>
 			</View>
 		)
 	}

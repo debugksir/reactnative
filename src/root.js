@@ -22,5 +22,4 @@ const mapStateToProps = (state) => ({
     switchFlag: state.switchFlag,
     fontSize: state.fontSize
 })
-const Root = connect(mapStateToProps)(Main);
-export default Root;
+export default connect(mapStateToProps)(Main);;

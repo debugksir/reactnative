@@ -16,7 +16,7 @@ const RowView = styled.View`
 	align-items: center;
 	width: 100%;
 `;
-const ColView = styled.View`
+const ColView = styled.TouchableOpacity`
 	height: 48;
 	justify-content: space-around;
 	align-items: center;
@@ -30,10 +30,11 @@ const Text = styled.Text`
 
 export default class Header extends Component {
 	render() {
+		const { nav } = this.props;
 		return(
 			<View>
 				<RowView>
-					<ColView>
+					<ColView onPress={ () => nav.navigate('Other')}>
 						<Icon name='envelope' size={20} color='#FFB2C3' />
 						<Text>信息</Text>
 					</ColView>

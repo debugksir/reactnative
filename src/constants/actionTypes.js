@@ -2,9 +2,7 @@ const actionTypes = {
 	increase: 'increase', 
 	decrease: 'decrease', 
 	switchtheme: 'switchtheme',
-	largefont: 'largefont',
-	middlefont: 'middlefont',
-	smallfont: 'smallfont'
+	switchfont: 'switchfont',
 }
 
 export default actionTypes;

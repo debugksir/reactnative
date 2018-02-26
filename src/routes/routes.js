@@ -4,17 +4,19 @@ import HomeScreen from '../containers/home';
 import ShopScreen from '../containers/shop';
 import Setting from '../pages/setting/setting';
 import ToSetting from '../components/me/header';
+import Article from '../pages/article/article';
+import Other from '../pages/other/other';
 
 const TabNav = TabNavigator({
-  Me: { screen: MeScreen },
-  Home: { screen: HomeScreen },
   Shop: { screen: ShopScreen },
+  Home: { screen: HomeScreen },
+  Me: { screen: MeScreen },
 },{
   tabBarPosition: 'bottom',
   animationEnabled: true,
   tabBarOptions: {
-    activeTintColor: '#1CABA7',
-    inactiveTintColor: '#03C3D6',
+    activeTintColor: '#03C3D6',
+    inactiveTintColor: '#484848',
     showIcon: true,
     labelStyle: {
       fontSize: 10
@@ -48,7 +50,13 @@ const StackNav = StackNavigator({
 	},
 	ToSetting: {
 		screen: ToSetting
-	}
+	},
+  Article: {
+    screen: Article
+  },
+  Other: {
+    screen: Other
+  }
 })
 
 export default StackNav

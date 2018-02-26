@@ -6,6 +6,12 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../../actions/actions'
 
+import PopupDialog, { SlideAnimation, DialogTitle, DialogButton } from 'react-native-popup-dialog';
+const slideAnimation = new SlideAnimation({
+  slideFrom: 'bottom',
+});
+
+
 const View = styled.View`
 	width: 100%;
 	height: 100%;
@@ -15,7 +21,7 @@ const View = styled.View`
 	border-bottom-width: 2px;
 `;
 const Text = styled.Text`
-	font-size: ${props => props.theme.title};
+	font-size: ${props => props.theme.text};
 	color: ${props => props.theme.normalFont};
 `;
 const ItemGroup = styled.View`
@@ -52,6 +58,7 @@ const LeftText = styled.Text`
 `;
 
 const RightText = styled.Text`
+	padding: 10px;
 	font-size: ${props => props.theme.tip};
 	color: ${props => props.theme.grayFont};
 `;
@@ -66,17 +73,32 @@ const Arrow = <RightText><Icon name='angle-right' size={16} /> </RightText>
 class Setting extends Component {
 	static navigationOptions = ({navigation}) => ({
       headerTitle: <Text>设置</Text>,
-      headerLeft: <Text style={{marginLeft: 16}} onPress={()=> navigation.goBack()}><Icon name='reply' size={16} /></Text>,
+      headerLeft: <Text style={{marginLeft: 16,width: 32,height: 32, lineHeight: 32}} onPress={()=> navigation.goBack()}><Icon name='reply' size={16} /></Text>,
       headerStyle: {
       	height: 44,
-      	backgroundColor: '#49ECDA'
+      	backgroundColor: '#CCCCCC',
+      	borderStyle: 'solid',
+		borderBottomColor: '#D1D1D1',
+		borderBottomWidth: 2
       }
     })
 	render() {
 		const { navigate } = this.props.navigation;
-		const { switchFlag, actions } = this.props;
+		const { fontSize, switchFlag, actions } = this.props;
 		return(
 			<View>
+				<PopupDialog
+					ref={(popupDialog) => { this.popupDialog = popupDialog }}
+					dialogAnimation={slideAnimation}
+					dialogTitle={<DialogTitle title="字体设置" />}
+					actions={[
+						<DialogButton textStyle={{fontSize: 12}} text="大" onPress={() => {actions.switchFontAction('large');this.popupDialog.dismiss()}} key="button1" />,
+						<DialogButton textStyle={{fontSize: 12}} text="中" onPress={() => {actions.switchFontAction('middle');;this.popupDialog.dismiss()}} key="button2" />,
+						<DialogButton textStyle={{fontSize: 12}} text="小" onPress={() => {actions.switchFontAction('small');;this.popupDialog.dismiss()}} key="button3" />
+					]}
+				>
+					<Text></Text>
+				</PopupDialog>
 				<ItemGroup>
 					<Item>
 						<LeftText>账号绑定</LeftText>
@@ -102,7 +124,7 @@ class Setting extends Component {
 					</Item>
 					<Item>
 						<LeftText>字体设置</LeftText>
-						<RightText>中等</RightText>
+						<RightText onPress={() => {this.popupDialog.show()}}>{fontSize == 'large' ? '大' : (fontSize == 'middle' ? '中' : '小')}</RightText>
 					</Item>
 				</ItemGroup>
 
@@ -118,7 +140,6 @@ class Setting extends Component {
 				</ItemGroup>
 
 				<Button> 退出登录 </Button>
-
 			</View>
 		)
 	}
@@ -127,12 +148,14 @@ class Setting extends Component {
 Setting.propTypes = {
 	switchFlag: PropTypes.bool.isRequired,
 	actions: PropTypes.shape({
-		switchThemeAction: PropTypes.func.isRequired
+		switchThemeAction: PropTypes.func.isRequired,
+		switchFontAction: PropTypes.func.isRequired
 	})
 }
 
 const mapStateToProps = (state) => ({
-  switchFlag: state.switchFlag
+  switchFlag: state.switchFlag,
+  fontSize: state.fontSize
 });
 const mapDispatchToProps = (dispatch) => {
   const actions = bindActionCreators(actionCreators, dispatch)

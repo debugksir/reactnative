@@ -4,7 +4,7 @@ import types from '../constants/actionTypes';
 const initState = {
 	countValue: 0,
 	switchFlag: false,
-	fontSize: 'large'
+	fontSize: 'small'
 };
 
 const reducers = (state = initState, action) => {
@@ -17,12 +17,8 @@ const reducers = (state = initState, action) => {
 			return {...state, countValue: countValue - 1}
 		case types.switchtheme:
 			return {...state, switchFlag: !action.switchFlag}
-		case types.largefont:
-			return {...state, fontSize: action.fontType}
-		case types.middlefont:
-			return {...state, fontSize: action.fontType}
-		case types.smallfont:
-			return {...state, fontSize: action.fontType}
+		case types.switchfont:
+			return {...state, fontSize: action.fontSize}
 		default:
 			return state
 	}

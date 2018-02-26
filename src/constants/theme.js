@@ -6,6 +6,7 @@ const theme = {
 		normalFont: '#484848',
 		grayFont: '#898989',
 		lightFont: '#9E9E9E',
+		activeFont: '#16BBAC'
 	},
 	dark: {
 		mainBg: '#595959',
@@ -13,24 +14,25 @@ const theme = {
 		normalFont: '#F2FCFC',
 		grayFont: '#DEFEFE',
 		lightFont: '#99FAF3',
+		activeFont: '#62FFF1'
 	},
 	large: {
+		strong: 28,
+		title: 20,
+		text: 16,
+		tip: 14
+	},
+	middle: {
+		strong: 26,
+		title: 18,
+		text: 14,
+		tip: 12
+	},
+	small: {
 		strong: 24,
 		title: 16,
 		text: 12,
 		tip: 10
-	},
-	middle: {
-		strong: 22,
-		title: 14,
-		text: 10,
-		four: 8
-	},
-	small: {
-		strong: 20,
-		title: 12,
-		text: 8,
-		four: 6
 	}
 }
 
